@@ -1,0 +1,42 @@
+<html>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>Ulke Ekleme-Guncelleme Formu</title>
+	<style>
+	.form-error-text{color: red}
+	</style>
+</head>
+
+<body>
+	
+	<form  th:action="@{/ulkeler/kaydet}"
+					th:object="${newCountry}" method="POST">
+				
+		<input type="text" th:field="*{countryId}"	class="form-control mb-4 col-4" placeholder="Ulke Id'si"  th:errorclass="form-field-error" >
+		<p class="form-error-text" th:if="${#fields.hasErrors('countryId')}" th:errors="*{countryId}"></p> 
+		<input type="text" th:field="*{countryName}" class="form-control mb-4 col-4"	placeholder="Ulke Ismi" th:errorclass="form-field-error">
+		<p class="form-error-text" th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}"></p>
+		
+		<select th:field="*{region.regionId}"	class="form-control mb-4 col-4" >
+			
+			<option 
+					th:each= "kita : ${kitalar}"
+					th:value="${kita.regionId}"
+					th:selected="${kita.regionId.equals(newCountry.region.regionId)}"
+					th:text="${kita.regionName}"></option>
+
+
+
+		</select>
+				<br/><br/>
+		<button type="submit" class="btn btn-info">Kaydet</button>	
+				</form>
+	 <a th:href="@{/ulkeler/list}" class="btn btn-warning">Geri Don</a>
+
+</body>
+
+</html>

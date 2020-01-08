@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ülkeler</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <h1>Ülke Listesi</h1>
+    </div>
+  </div>
+  <div id="container">
+    <div id="content">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Ulke Adı</th>
+            <th scope="col">Kıta</th>
+            <th scope="col">Guncelle</th>
+            <th scope="col">Sil</th>
+
+          </tr>
+          <tr>Arama:<form th:action="@{/ulkeler/searchCountry}" method="GET">
+              <input type="text" th:name="countryName" class="form-control mb-4 col-4" placeholder="Arama..">
+              <button type="submit" class="btn btn-info">Ara</button>
+            </form>
+          </tr>
+        </thead>
+        <th:block th:each="ulke : ${countries}">
+
+          <tr>
+            <td th:text="${ulke.countryId}">...</td>
+            <td th:text="${ulke.countryName}">...</td>
+            <td th:text="${ulke.region.regionName}">...</td>
+            <td><a th:href="@{'/ulkeler/guncelleFormunuGoster/'+${ulke.countryId}}" class="btn btn-warning">Guncelle</a>
+              <th />
+              <a th:href="@{/ulkeler/sil(countryId=${ulke.countryId})}" onclick="if(!(confirm('Silmek istiyor musunuz?'))) return false" class="btn btn-danger">Sil</a></td>
+             
+               
+
+            
+          </tr>
+
+        </th:block>
+
+      </table>
+
+      <a th:href="@{/ulkeler/eklemeFormunuGoster}" class="btn btn-info">Ekle</a>
+
+
+
+
+
+    </div>
+
+
+  </div>
+  
+</body>
+
+</html>
