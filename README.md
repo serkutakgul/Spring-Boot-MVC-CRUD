@@ -1,1 +1,1 @@
-# Spring-MVC-CRUD
+# Spring-Boot-MVC-CRUD
